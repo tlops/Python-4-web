@@ -1,0 +1,21 @@
+import urllib
+from BeautifulSoup import *
+
+url = raw_input('Enter URL: ')
+count = input('Enter Count: ')
+position = input('Enter Position: ')
+position = position - 1
+
+def open_url(url):
+    html = urllib.urlopen(url).read()
+    soup = BeautifulSoup(html)
+# Retrieve all of the anchor tags
+    tags = soup('a')
+    return tags
+
+tags = open_url(url)
+search_url(tags)
+for pos,tag in enumerate(tags):
+    if pos == position:
+        new_url = tag.get('href', None)
+        print new_url
